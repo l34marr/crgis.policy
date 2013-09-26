@@ -9,9 +9,9 @@
 
   <genericsetup:registerProfile
       name="default"
-      title="crgis.policy"
+      title="CRGIS Policy"
       directory="profiles/default"
-      description="Installs the crgis.policy package"
+      description="CRGIS project policy package"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
   <!-- -*- extra stuff goes here -*- -->
