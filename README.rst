@@ -1,7 +1,9 @@
+.. contents::
+
 Introduction
 ============
 
-crgis.policy offers custom workflow and data import/export for the CRGIS project.
+crgis.policy offers custom indexer, catalog, workflow and data import/export for the CRGIS project.
 
 Installation
 ============

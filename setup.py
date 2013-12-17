@@ -6,8 +6,8 @@ version = '0.1'
 setup(name='crgis.policy',
       version=version,
       description="CRGIS Project Policy Package",
-      long_description=open("README.txt").read() + "\n" +
-                       open(os.path.join("docs", "HISTORY.txt")).read(),
+      long_description=open("README.rst").read() + "\n" +
+                       open(os.path.join("docs", "HISTORY.rst")).read(),
       # Get more strings from
       # http://pypi.python.org/pypi?:action=list_classifiers
       classifiers=[
@@ -17,7 +17,7 @@ setup(name='crgis.policy',
       keywords='',
       author='',
       author_email='',
-      url='http://svn.plone.org/svn/collective/',
+      url='http://github.com/l34marr/crgis.policy',
       license='GPL',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['crgis'],
