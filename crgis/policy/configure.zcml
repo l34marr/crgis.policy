@@ -8,12 +8,14 @@
   <five:registerPackage package="." initialize=".initialize" />
 
   <genericsetup:registerProfile
-      name="default"
-      title="CRGIS Policy"
-      directory="profiles/default"
-      description="CRGIS project policy package"
-      provides="Products.GenericSetup.interfaces.EXTENSION"
-      />
+    name="default"
+    title="CRGIS Policy"
+    directory="profiles/default"
+    description="CRGIS Project Policy Package"
+    provides="Products.GenericSetup.interfaces.EXTENSION"
+    />
+
   <!-- -*- extra stuff goes here -*- -->
-  
+  <adapter name="adm_area" factory=".indexers.adm_area" />
+
 </configure>
