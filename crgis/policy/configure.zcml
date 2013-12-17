@@ -17,5 +17,6 @@
 
   <!-- -*- extra stuff goes here -*- -->
   <adapter name="adm_area" factory=".indexers.adm_area" />
+  <adapter name="function" factory=".indexers.function" />
 
 </configure>

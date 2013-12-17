@@ -4,5 +4,8 @@
 <index name="adm_area" meta_type="FieldIndex">
   <indexed_attr value="adm_area" />
 </index>
+<index name="function" meta_type="FieldIndex">
+  <indexed_attr value="function" />
+</index>
 
 </object>

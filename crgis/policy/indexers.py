@@ -6,3 +6,7 @@ from crgis.content.theater import ITheater
 def adm_area(obj):
     return obj.adm_area
 
+@indexer(ITheater)
+def function(obj):
+    return obj.function
+
