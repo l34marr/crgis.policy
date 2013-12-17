@@ -14,3 +14,7 @@ def function(obj):
 def owner(obj):
     return obj.owner
 
+@indexer(ITheater)
+def operator(obj):
+    return obj.operator
+

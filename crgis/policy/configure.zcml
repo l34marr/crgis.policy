@@ -19,5 +19,6 @@
   <adapter name="adm_area" factory=".indexers.adm_area" />
   <adapter name="function" factory=".indexers.function" />
   <adapter name="owner" factory=".indexers.owner" />
+  <adapter name="operator" factory=".indexers.operator" />
 
 </configure>

@@ -10,5 +10,8 @@
 <index name="owner" meta_type="FieldIndex">
   <indexed_attr value="owner" />
 </index>
+<index name="operator" meta_type="FieldIndex">
+  <indexed_attr value="operator" />
+</index>
 
 </object>
