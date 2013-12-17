@@ -10,3 +10,7 @@ def adm_area(obj):
 def function(obj):
     return obj.function
 
+@indexer(ITheater)
+def owner(obj):
+    return obj.owner
+

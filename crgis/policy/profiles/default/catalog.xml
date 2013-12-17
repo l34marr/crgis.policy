@@ -7,5 +7,8 @@
 <index name="function" meta_type="FieldIndex">
   <indexed_attr value="function" />
 </index>
+<index name="owner" meta_type="FieldIndex">
+  <indexed_attr value="owner" />
+</index>
 
 </object>
