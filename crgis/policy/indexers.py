@@ -18,3 +18,7 @@ def owner(obj):
 def operator(obj):
     return obj.operator
 
+@indexer(ITheater)
+def in_charge(obj):
+    return obj.in_charge
+

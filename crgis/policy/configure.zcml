@@ -20,5 +20,6 @@
   <adapter name="function" factory=".indexers.function" />
   <adapter name="owner" factory=".indexers.owner" />
   <adapter name="operator" factory=".indexers.operator" />
+  <adapter name="in_charge" factory=".indexers.in_charge" />
 
 </configure>

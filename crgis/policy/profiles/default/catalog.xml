@@ -13,5 +13,8 @@
 <index name="operator" meta_type="FieldIndex">
   <indexed_attr value="operator" />
 </index>
+<index name="in_charge" meta_type="FieldIndex">
+  <indexed_attr value="in_charge" />
+</index>
 
 </object>
