@@ -16,6 +16,8 @@
     />
 
   <!-- -*- extra stuff goes here -*- -->
+  <adapter name="deity_main" factory=".indexers.deity_main" />
+  <adapter name="founded" factory=".indexers.founded" />
   <adapter name="adm_area" factory=".indexers.adm_area" />
   <adapter name="function" factory=".indexers.function" />
   <adapter name="owner" factory=".indexers.owner" />
