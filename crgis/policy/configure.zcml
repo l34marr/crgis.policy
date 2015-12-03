@@ -1,20 +1,23 @@
 <configure
-    xmlns="http://namespaces.zope.org/zope"
-    xmlns:five="http://namespaces.zope.org/five"
-    xmlns:i18n="http://namespaces.zope.org/i18n"
-    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
-    i18n_domain="crgis.policy">
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:five="http://namespaces.zope.org/five"
+  xmlns:browser="http://namespaces.zope.org/browser"
+  xmlns:i18n="http://namespaces.zope.org/i18n"
+  xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+  i18n_domain="crgis.policy">
 
   <five:registerPackage package="." initialize=".initialize" />
+  <include package="z3c.jbot" file="meta.zcml" />
+
+  <browser:jbot
+    directory="overrides" />
 
   <genericsetup:registerProfile
     name="default"
     title="CRGIS Policy"
     directory="profiles/default"
     description="CRGIS Project Policy Package"
-    provides="Products.GenericSetup.interfaces.EXTENSION"
-    />
-
+    provides="Products.GenericSetup.interfaces.EXTENSION" />
   <!-- -*- extra stuff goes here -*- -->
   <adapter name="deity_main" factory=".indexers.deity_main" />
   <adapter name="founded" factory=".indexers.founded" />

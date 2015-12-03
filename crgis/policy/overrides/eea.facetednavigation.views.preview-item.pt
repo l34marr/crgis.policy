@@ -1,0 +1,48 @@
+<div class="photoAlbumEntry"
+  tal:define="portal_type context/portal_type;
+              useViewTypes context/portal_properties/site_properties/typesUseViewActionInListings;
+              useView python:portal_type in useViewTypes;">
+  <a tal:define="
+      deity_host context/deity_host|string:;
+      description context/Description|string:;
+      title context/pretty_title_or_id|string:;
+      desc_or_title python:description or title;
+      url context/absolute_url|string:#;
+      view_url python:(url and useView and url + '/view') or url;
+      image_thumb exists:context/image_thumb;
+      image_tag python:getattr(context, 'tag', None)"
+     tal:attributes="href view_url;
+                     title description">
+
+    <span class="photoAlbumEntryWrapper" tal:condition="image_thumb">
+      <img style="border: none" tal:attributes="
+        title desc_or_title;
+        alt title;
+        src string:$url/image_thumb"/>
+    </span>
+
+    <span class="photoAlbumEntryWrapper" tal:condition="python:not image_thumb and image_tag">
+      <img tal:replace="structure python:image_tag(scale='thumb', title=description)" />
+    </span>
+
+    <span class="photoAlbumEntryDescription" tal:content="context/pretty_title_or_id|string:">Title</span>
+    <span class="photoAlbumEntryTitle">
+    <tal:temple condition="python: portal_type=='Temple'">
+    <tal:cou replace="python:context.aq_parent.aq_parent.Title()" /><tal:tow replace="python:context.aq_parent.Title()" />
+    </tal:temple>
+    <tal:theater condition="python: portal_type=='Theater'">
+    <span tal:replace="context/adm_area" />
+    </tal:theater>
+    </span>
+    <tal:temple condition="python: portal_type=='Temple'">
+    <span class="photoAlbumEntryTitle">
+    主祀:
+    <tal:deities repeat="deity deity_host">
+    <tal:deity replace="python:context.deity_term(deity)">Deity Name</tal:deity>
+    <span class="separator" tal:condition="not: repeat/deity/end">,</span>
+    </tal:deities>
+    </span>
+    </tal:temple>
+
+  </a>
+</div>
