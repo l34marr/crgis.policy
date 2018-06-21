@@ -6,10 +6,17 @@ from zope.schema.interfaces import IVocabularyFactory
 from plone.indexer.decorator import indexer
 from BeautifulSoup import BeautifulSoup as bs
 from Products.ATContentTypes.interfaces import IATDocument
-from crgis.atcontents.interfaces.temple import ITemple
+try:
+    from crgis.atcontents.interfaces.temple import ITemple
+except ImportError:
+    from crgis.content.interfaces import ITemple
+try:
+    from crgis.atcontents.interfaces import IBiXieWu
+except ImportError:
+    from crgis.content.interfaces import IBiXieWu
+
 #from crgis.content.theater import ITheater
 #from crgis.content.liuyu import ILiuYu
-from crgis.atcontents.interfaces import IBiXieWu
 
 
 #@indexer(IATDocument)
