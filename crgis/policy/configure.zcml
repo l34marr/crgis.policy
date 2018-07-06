@@ -19,12 +19,19 @@
     description="CRGIS Project Policy Package"
     provides="Products.GenericSetup.interfaces.EXTENSION" />
   <!-- -*- extra stuff goes here -*- -->
+  <adapter name="bgis_type" factory=".indexers.bgis_type" />
+  <adapter name="deity" factory=".indexers.deity" />
   <adapter name="deity_main" factory=".indexers.deity_main" />
+  <adapter name="wynm" factory=".indexers.wynm" />
+  <adapter name="area1" factory=".indexers.area1_bgis" />
+  <adapter name="area1" factory=".indexers.area1_temple" />
+  <adapter name="area2" factory=".indexers.area2" />
+  <adapter name="hostcmpn" factory=".indexers.hostcmpn" />
   <adapter name="founded" factory=".indexers.founded" />
-  <adapter name="adm_area" factory=".indexers.adm_area" />
-  <adapter name="function" factory=".indexers.function" />
-  <adapter name="owner" factory=".indexers.owner" />
-  <adapter name="operator" factory=".indexers.operator" />
-  <adapter name="in_charge" factory=".indexers.in_charge" />
+  <!-- adapter name="adm_area" factory=".indexers.adm_area" / -->
+  <!-- adapter name="function" factory=".indexers.function" / -->
+  <!-- adapter name="owner" factory=".indexers.owner" / -->
+  <!-- adapter name="operator" factory=".indexers.operator" / -->
+  <!-- adapter name="in_charge" factory=".indexers.in_charge" / -->
 
 </configure>
