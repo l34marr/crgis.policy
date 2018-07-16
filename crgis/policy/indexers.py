@@ -6,6 +6,8 @@ from zope.schema.interfaces import IVocabularyFactory
 from plone.indexer.decorator import indexer
 from BeautifulSoup import BeautifulSoup as bs
 from Products.ATContentTypes.interfaces import IATDocument
+from crgis.content.interfaces import IDaoShi
+from crgis.content.interfaces import IDaoFaTan
 try:
     from crgis.atcontents.interfaces.temple import ITemple
 except ImportError:
@@ -15,29 +17,6 @@ try:
 except ImportError:
     from crgis.content.interfaces import IBiXieWu
 
-#from crgis.content.theater import ITheater
-#from crgis.content.liuyu import ILiuYu
-
-
-#@indexer(IATDocument)
-#def portal_type(obj):
-#    if obj.__parent__.getId() == 'bgis':
-#        return 'Buddhist'
-
-@indexer(IATDocument)
-def bgis_type(obj):
-    if obj.__parent__.getId() == 'bgis':
-        try:
-            k, v = bs(obj.getText()).find('p', {'class': 'ct'}).text.split(': ')
-            if k == u'分類': return v
-        except ValueError:
-            pass
-
-@indexer(IATDocument)
-def area1_bgis(obj):
-    if obj.__parent__.getId() == 'bgis':
-        k, v = bs(obj.getText()).find('p', {'class': 'pr'}).text.split(': ')
-        if k == u'省': return v
 
 @indexer(ITemple)
 def deity_main(obj, **kw):
@@ -110,13 +89,19 @@ def founded(obj):
         except ValueError:
             pass
 
-#@indexer(ITheater)
-#def adm_area(obj):
-#    return obj.adm_area
+@indexer(IDaoShi)
+def dt_type_shi(obj):
+    if obj.dt_type == list():
+        pass
+    else:
+        return obj.dt_type[0]
 
-#@indexer(ITheater)
-#def function(obj):
-#    return obj.function
+@indexer(IDaoFaTan)
+def dt_type_tan(obj):
+    if obj.dt_type == list():
+        pass
+    else:
+        return obj.dt_type[0]
 
 @indexer(IBiXieWu)
 def purpose(obj):
@@ -158,18 +143,6 @@ def lct_tow(obj):
 def lct_vil(obj):
     return obj.lct_vil
 
-#@indexer(ITheater)
-#def owner(obj):
-#    return obj.owner
-
-#@indexer(ITheater)
-#def operator(obj):
-#    return obj.operator
-
-#@indexer(ITheater)
-#def in_charge(obj):
-#    return obj.in_charge
-
 @indexer(IBiXieWu)
 def height(obj):
     if obj.shi_h:
@@ -180,75 +153,4 @@ def height(obj):
     else:
         value = None
     return value
-
-#@indexer(ILiuYu)
-#def time_start(obj):
-#    if obj.year_start:
-#        try:
-#            time = int(obj.year_start)
-#        except ValueError:
-#            time = None
-#    else:
-#        time = None
-#    return time
-
-#@indexer(ILiuYu)
-#def country(obj):
-#    return obj.country
-
-#@indexer(ILiuYu)
-#def state(obj):
-#    return obj.state
-
-#@indexer(ILiuYu)
-#def city(obj):
-#    return obj.city
-
-#@indexer(ILiuYu)
-#def county(obj):
-#    return obj.county
-
-#@indexer(ILiuYu)
-#def river(obj):
-#    return obj.river
-
-#@indexer(ILiuYu)
-#def mountain(obj):
-#    return obj.mountain
-
-#@indexer(ILiuYu)
-#def monastery(obj):
-#    return obj.monastery
-
-#@indexer(ILiuYu)
-#def tomb(obj):
-#    return obj.tomb
-
-#@indexer(ILiuYu)
-#def castle(obj):
-#    return obj.castle
-
-#@indexer(ILiuYu)
-#def fortress(obj):
-#    return obj.fortress
-
-#@indexer(ILiuYu)
-#def relices(obj):
-#    return obj.relices
-
-#@indexer(ILiuYu)
-#def buildings(obj):
-#    return obj.buildings
-
-#@indexer(ILiuYu)
-#def legend(obj):
-#    return obj.legend
-
-#@indexer(ILiuYu)
-#def people(obj):
-#    return obj.people.raw
-
-#@indexer(ILiuYu)
-#def ref_name(obj):
-#    return obj.ref_name
 
