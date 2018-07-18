@@ -1,13 +1,16 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+from Acquisition import aq_base
 from zope.component import getUtility
 from zope.schema.interfaces import IVocabularyFactory
 from plone.indexer.decorator import indexer
+from Products.CMFPlone.utils import safe_unicode
 from BeautifulSoup import BeautifulSoup as bs
 from Products.ATContentTypes.interfaces import IATDocument
 from crgis.content.interfaces import IDaoShi
 from crgis.content.interfaces import IDaoFaTan
+from crgis.content.interfaces import IKeYi
 try:
     from crgis.atcontents.interfaces.temple import ITemple
 except ImportError:
@@ -91,17 +94,36 @@ def founded(obj):
 
 @indexer(IDaoShi)
 def dt_type_shi(obj):
-    if obj.dt_type == list():
+    if obj.dt_type == tuple():
         pass
     else:
         return obj.dt_type[0]
 
 @indexer(IDaoFaTan)
 def dt_type_tan(obj):
-    if obj.dt_type == list():
+    if obj.dt_type == tuple():
         pass
     else:
         return obj.dt_type[0]
+
+@indexer(IKeYi)
+def leibie(obj):
+    if obj.leibie == tuple():
+        pass
+    else:
+        return obj.leibie[0]
+
+@indexer(IDaoFaTan)
+def chngyn(obj):
+    if obj.aq_base.chngyn == tuple():
+        return tuple()
+    return tuple(safe_unicode(s.to_object.Title()) for s in obj.aq_base.chngyn)
+
+@indexer(IDaoShi)
+def shchn(obj):
+    if obj.aq_base.shchn == tuple():
+        return tuple()
+    return tuple(safe_unicode(s.to_object.Title()) for s in obj.aq_base.shchn)
 
 @indexer(IBiXieWu)
 def purpose(obj):
