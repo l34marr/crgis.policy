@@ -31,5 +31,6 @@
   <adapter name="leibie" factory=".indexers.leibie" />
   <adapter name="chngyn" factory=".indexers.chngyn" />
   <adapter name="shchn" factory=".indexers.shchn" />
+  <adapter name="SearchableText" factory=".indexers.SearchableText_banhua" />
 
 </configure>

@@ -5,12 +5,14 @@ from Acquisition import aq_base
 from zope.component import getUtility
 from zope.schema.interfaces import IVocabularyFactory
 from plone.indexer.decorator import indexer
+from plone.app.contenttypes.indexers import _unicode_save_string_concat
+from plone.app.contenttypes.indexers import SearchableText
 from Products.CMFPlone.utils import safe_unicode
 from BeautifulSoup import BeautifulSoup as bs
-from Products.ATContentTypes.interfaces import IATDocument
 from crgis.content.interfaces import IDaoShi
 from crgis.content.interfaces import IDaoFaTan
 from crgis.content.interfaces import IKeYi
+from crgis.content.interfaces import IBanHua
 try:
     from crgis.atcontents.interfaces.temple import ITemple
 except ImportError:
@@ -175,4 +177,8 @@ def height(obj):
     else:
         value = None
     return value
+
+@indexer(IBanHua)
+def SearchableText_banhua(obj):
+    return _unicode_save_string_concat(SearchableText(obj))
 
