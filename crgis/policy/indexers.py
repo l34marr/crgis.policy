@@ -86,8 +86,8 @@ def hostcmpn(obj):
 
 @indexer(ITemple)
 def founded(obj):
-    if obj.era == '':
-        pass
+    if obj.era is None or obj.era == '':
+        return None
     else:
         try:
             return int(obj.era)
