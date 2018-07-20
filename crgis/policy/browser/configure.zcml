@@ -1,0 +1,12 @@
+<configure
+ xmlns="http://namespaces.zope.org/zope"
+ xmlns:browser="http://namespaces.zope.org/browser">
+
+  <browser:page
+    name="groupby_view"
+    for="plone.app.contenttypes.interfaces.ICollection"
+    class="plone.app.contenttypes.browser.collection.CollectionView"
+    template="groupby_view.pt"
+    permission="zope2.View" />
+
+</configure>

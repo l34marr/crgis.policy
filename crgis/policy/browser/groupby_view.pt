@@ -1,0 +1,118 @@
+<html lang="en"
+ xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+ xmlns:tal="http://xml.zope.org/namespaces/tal"
+ xmlns:metal="http://xml.zope.org/namespaces/metal"
+ xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+ metal:use-macro="context/main_template/macros/master"
+ i18n:domain="crgis.policy">
+
+<body>
+
+<metal:content-core fill-slot="content-core">
+<metal:block define-macro="content-core">
+
+  <div metal:define-macro="text-field-view"
+   id="parent-fieldname-text" class="stx"
+   tal:define="text view/text"
+   tal:condition="text"
+   tal:attributes="class view/text_class">
+    <div metal:define-slot="inside" tal:replace="structure text">The body</div>
+  </div>
+
+  <metal:listingmacro define-macro="listing">
+    <tal:results define="batch view/batch;
+                         thumb_scale_list view/get_thumb_scale_list;
+                         thumb_scale_table view/get_thumb_scale_table;
+                         thumb_scale_summary view/get_thumb_scale_summary;
+                         img_class python:'thumb-%s pull-right' % thumb_scale_list;
+                         showicons view/show_icons">
+
+    <tal:listing condition="batch">
+
+<?python
+cts = []
+for obj in batch:
+    cts.append(obj.Type())
+cts = list(set(cts))
+?>
+
+      <div class="entries" metal:define-slot="entries"
+       tal:define="portal context/@@plone_portal_state/portal;
+                   image_scale portal/@@image_scale">
+
+<tal:type repeat="ct cts">
+<h2>${ct}</h2>
+        <tal:repeat repeat="item batch" metal:define-macro="entries">
+          <tal:block define="obj item/getObject;
+           item_url item/getURL;
+           item_id item/getId;
+           item_title item/Title;
+           item_description item/Description;
+           item_type item/PortalType;
+           item_modified item/ModificationDate;
+           item_created item/CreationDate;
+           item_wf_state item/review_state;
+           item_wf_state_class python:'state-' + view.normalizeString(item_wf_state);
+           item_creator item/Creator;
+           item_link python:item_type in view.use_view_action and item_url+'/view' or item_url;
+           item_is_event python:view.is_event(obj);
+           item_has_image python:item.getIcon;
+           item_type_class python:('contenttype-' + view.normalizeString(item_type)) if showicons else '' ;"
+           tal:condition="python:item_type == ct">
+
+        <div class="container"
+         style="background-color: #e6e4e4; margin-bottom: 10px;
+                box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.65); border-radius: 4px; order: 1px solid">
+          <h2 class="tileHeadline col-sm-4" metal:define-macro="listitem">
+            <a class="summary url"
+                tal:attributes="href item_link;
+                                title item_type"
+                tal:content="item_title">
+              Item Title
+            </a>
+          </h2>
+
+          <div tal:define="thumb_url python:item_url + '/@@images/image/' + thumb_scale_summary;"
+               tal:condition="python: item_has_image and thumb_scale_summary"
+               tal:attributes="class python: 'tileImage' if item_description else 'tileImageNoFloat'">
+            <a tal:attributes="href item_link">
+              <img tal:replace="structure python:image_scale.tag(item, 'image', scale=thumb_scale_summary, css_class='thumb-' + thumb_scale_summary)" />
+            </a>
+          </div>
+
+          <div class="tileBody col-sm-8" style="margin-top: 10px; margin-bottom:10px">
+            <span class="description" tal:content="item_description">
+              description
+            </span>
+          </div>
+
+          <div class="visualClear"><!-- --></div>
+
+        </div>
+
+          </tal:block>
+        </tal:repeat>
+</tal:type>
+
+      </div>
+
+      <div metal:use-macro="context/batch_macros/macros/navigation" />
+
+    </tal:listing>
+
+    <metal:empty metal:define-slot="no_items_in_listing">
+      <p class="discreet"
+       tal:condition="not: view/batch"
+       tal:content="view/no_items_message">
+          There are currently no items in this folder.
+      </p>
+    </metal:empty>
+
+    </tal:results>
+  </metal:listingmacro>
+
+</metal:block>
+</metal:content-core>
+
+</body>
+</html>

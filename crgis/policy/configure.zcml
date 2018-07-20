@@ -7,6 +7,7 @@
   i18n_domain="crgis.policy">
 
   <five:registerPackage package="." initialize=".initialize" />
+  <include package=".browser" />
   <include package="z3c.jbot" file="meta.zcml" />
 
   <browser:jbot
