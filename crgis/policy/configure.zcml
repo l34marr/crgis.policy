@@ -34,4 +34,6 @@
   <adapter name="shchn" factory=".indexers.shchn" />
   <adapter name="SearchableText" factory=".indexers.SearchableText_banhua" />
 
+  <adapter factory=".validators.ImageFileSizeValidator" />
+
 </configure>
