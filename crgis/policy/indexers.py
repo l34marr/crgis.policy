@@ -122,7 +122,13 @@ def chngyn(obj):
     return tuple(safe_unicode(s.to_object.Title()) for s in obj.aq_base.chngyn)
 
 @indexer(IDaoShi)
-def shchn(obj):
+def shchn_shi(obj):
+    if obj.aq_base.shchn == tuple():
+        return tuple()
+    return tuple(safe_unicode(s.to_object.Title()) for s in obj.aq_base.shchn)
+
+@indexer(IDaoFaTan)
+def shchn_tan(obj):
     if obj.aq_base.shchn == tuple():
         return tuple()
     return tuple(safe_unicode(s.to_object.Title()) for s in obj.aq_base.shchn)
