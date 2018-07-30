@@ -28,11 +28,15 @@ def deity_main(obj, **kw):
     results = []
     factory = getUtility(IVocabularyFactory, 'deity_name')
     vocabulary = factory(obj)
-    for value in obj.getDeity_host():
+    if obj.deity_host == None:
+        return None
+    for value in obj.deity_host:
         try:
             existing = vocabulary.getTerm(value)
             results.append(existing.title.split(u': ')[0].encode('utf8'))
         except LookupError:
+            if value == u'福德正神': value = u'土地公'
+            if value == u'開台聖王(鄭成功)': value = u'鄭成功'
             results.append(value)
     return results
 
@@ -41,7 +45,7 @@ def deity(obj, **kw):
     results = []
     factory = getUtility(IVocabularyFactory, 'deity_name')
     vocabulary = factory(obj)
-    for value in (set(obj.getDeity_host()) | set(obj.getDeity_company())):
+    for value in (set(obj.deity_host) | set(obj.deity_company)):
         try:
             existing = vocabulary.getTerm(value)
             results.append(existing.title.split(u': ')[0].encode('utf8'))
@@ -52,7 +56,7 @@ def deity(obj, **kw):
 @indexer(ITemple)
 def wynm(obj):
     results = []
-    for value in obj.getWysm().split(u';'):
+    for value in obj.wysm().split(u';'):
         if value == u'': continue
         results.append(u''.join(value.split(u',')))
     return results
@@ -68,8 +72,8 @@ def area2(obj):
 @indexer(ITemple)
 def hostcmpn(obj):
     results = []
-    host = obj.getDeity_host()
-    cmpn = obj.getDeity_company()
+    host = obj.deity_host
+    cmpn = obj.deity_company
     if 'deity_001' in host or '\xe7\x8e\x8b\xe7\x88\xba' in host:
         results.append('hwy')
     if 'deity_001' in cmpn or '\xe7\x8e\x8b\xe7\x88\xba' in cmpn:
@@ -92,7 +96,7 @@ def founded(obj):
         try:
             return int(obj.era)
         except ValueError:
-            pass
+            return None
 
 @indexer(IDaoShi)
 def dt_type_shi(obj):
