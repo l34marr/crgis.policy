@@ -13,6 +13,7 @@ from crgis.content.interfaces import IDaoShi
 from crgis.content.interfaces import IDaoFaTan
 from crgis.content.interfaces import IKeYi
 from crgis.content.interfaces import IBanHua
+from crgis.content.interfaces import IBuddhist
 try:
     from crgis.atcontents.interfaces.temple import ITemple
 except ImportError:
@@ -56,7 +57,8 @@ def deity(obj, **kw):
 @indexer(ITemple)
 def wynm(obj):
     results = []
-    for value in obj.wysm().split(u';'):
+    if obj.wysm == None: return None
+    for value in obj.wysm.split(u';'):
         if value == u'': continue
         results.append(u''.join(value.split(u',')))
     return results
@@ -64,6 +66,10 @@ def wynm(obj):
 @indexer(ITemple)
 def area1_temple(obj):
     return obj.__parent__.__parent__.Title()
+
+@indexer(IBuddhist)
+def area1_buddhist(obj):
+    return obj.area
 
 @indexer(ITemple)
 def area2(obj):
@@ -113,9 +119,9 @@ def dt_type_tan(obj):
         return obj.dt_type[0]
 
 @indexer(IKeYi)
-def leibie(obj):
+def leibie_keyi(obj):
     if obj.leibie == tuple():
-        pass
+        return None
     else:
         return obj.leibie[0]
 
@@ -191,4 +197,11 @@ def height(obj):
 @indexer(IBanHua)
 def SearchableText_banhua(obj):
     return _unicode_save_string_concat(SearchableText(obj))
+
+@indexer(IBuddhist)
+def leibie_buddhist(obj):
+    if obj.fenlei:
+        return obj.fenlei
+    else:
+        return None
 
