@@ -12,20 +12,20 @@ Precedence: bulk
      i18n:translate="mailtemplate_registered_user_body"
      tal:omit-tag=""
      tal:define="fullname python:member.getProperty('fullname')">
-    歡迎 <span i18n:name="fullname" tal:replace="fullname" />,
+    歡迎 <span tal:replace="fullname" />,
   
     你在 http://crgis.rchss.sinica.edu.tw/ 的使用者帳號，已經建立完成。
 </div>
 <div>
-  帳號名稱是 <span i18n:name="member" tal:replace="python:member.getUserName()" />
+  帳號名稱是 <span tal:replace="python:member.getUserName()" />
 </div>
 <div>
   請點選
-    <span i18n:name="set_password" tal:replace="python:view.construct_url(reset['randomstring'])+'?userid='+member.getUserName()" />
+    <span tal:replace="python:view.construct_url(reset['randomstring'])+'?userid='+member.getUserName()" />
   網址，並於表單中輸入自訂密碼後，即可使用新密碼來登入。
 </div>
 <div>
-    此網址有效日期至 <span i18n:name="expirationdate" tal:replace="python:
+    此網址有效日期至 <span tal:replace="python:
     context.toLocalizedTime(reset['expires'], long_format=1)" />
 </div>
 
