@@ -46,6 +46,8 @@ def deity(obj, **kw):
     results = []
     factory = getUtility(IVocabularyFactory, 'deity_name')
     vocabulary = factory(obj)
+    if obj.deity_host == None: obj.deity_host = []
+    if obj.deity_company == None: obj.deity_company = []
     for value in (set(obj.deity_host) | set(obj.deity_company)):
         try:
             existing = vocabulary.getTerm(value)
@@ -72,7 +74,7 @@ def area1_buddhist(obj):
     return obj.area
 
 @indexer(ITemple)
-def area2(obj):
+def area2_temple(obj):
     return obj.__parent__.__parent__.Title() + obj.__parent__.Title()
 
 @indexer(ITemple)
@@ -160,7 +162,7 @@ def color(obj):
     return obj.color
 
 @indexer(IBiXieWu)
-def genre(obj):
+def leibie_bixiewu(obj):
     return obj.genre
 
 @indexer(IBiXieWu)
@@ -176,8 +178,10 @@ def lct_cou(obj):
     return obj.lct_cou
 
 @indexer(IBiXieWu)
-def lct_tow(obj):
-    return obj.lct_tow
+def area2_bixiewu(obj):
+    if obj.lct_cou == None: obj.lct_cou = ''
+    if obj.lct_tow == None: obj.lct_tow = ''
+    return obj.lct_cou + obj.lct_tow
 
 @indexer(IBiXieWu)
 def lct_vil(obj):

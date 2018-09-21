@@ -25,12 +25,13 @@
   <adapter name="wynm" factory=".indexers.wynm" />
   <adapter name="area1" factory=".indexers.area1_temple" />
   <adapter name="area1" factory=".indexers.area1_buddhist" />
-  <adapter name="area2" factory=".indexers.area2" />
+  <adapter name="area2" factory=".indexers.area2_bixiewu" />
   <adapter name="hostcmpn" factory=".indexers.hostcmpn" />
   <adapter name="founded" factory=".indexers.founded" />
   <adapter name="dft_type" factory=".indexers.dt_type_shi" />
   <adapter name="dft_type" factory=".indexers.dt_type_tan" />
   <adapter name="leibie" factory=".indexers.leibie_keyi" />
+  <adapter name="leibie" factory=".indexers.leibie_bixiewu" />
   <adapter name="leibie" factory=".indexers.leibie_buddhist" />
   <adapter name="chngyn" factory=".indexers.chngyn" />
   <adapter name="shchn" factory=".indexers.shchn_shi" />
