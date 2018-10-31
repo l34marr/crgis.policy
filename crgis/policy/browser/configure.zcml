@@ -9,4 +9,11 @@
     template="groupby_view.pt"
     permission="zope2.View" />
 
+  <browser:page
+    name="frontpage"
+    for="*"
+    class=".view.FrontPage"
+    template="frontpage.pt"
+    permission="zope2.View" />
+
 </configure>

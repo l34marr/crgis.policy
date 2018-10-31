@@ -1,0 +1,107 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="crgis.policy">
+<body>
+
+<metal:content-core fill-slot="main">
+  <metal:content-core define-macro="content-core">
+
+  <h1 i18n:translate="listing_news">新聞消息</h1>
+    <tal:newsitems
+     tal:define="toLocalizedTime nocall:context/@@plone/toLocalizedTime;
+                 plone_view context/@@plone;"
+     tal:repeat="obj view/latest_news">
+    <div tal:define="item_object obj/getObject;
+                     item_description obj/Description;"
+         class="tileItem visualIEFloatFix">
+      <h2 class="tileHeadline">
+         <a href="#"
+            class="summary url"
+            tal:attributes="href obj/getURL;"
+            tal:content="obj/pretty_title_or_id">
+            News Title
+         </a>
+      </h2>
+      <span class="documentByLine"
+            tal:content="python:toLocalizedTime(obj.Date)">
+            News Date
+      </span>
+      <p class="tileBody" tal:condition="obj/Description">
+        <span tal:content="obj/Description">
+            News Description
+        </span>
+        ( <a href="#"
+            tal:attributes="href obj/getURL;"><span i18n:translate="read_more">閱讀全文</span></a> )
+      </p>
+      <div class="visualClear"><!-- --></div>
+    </div>
+    </tal:newsitems>
+
+    <div style="float: right">
+      <a href=""
+         tal:attributes="href view/allNewsURL">
+         <span i18n:translate="more_news" class="description">更多新聞</span>
+      </a>
+    </div>
+    <hr>
+    <div class="visualClear"><!-- --></div>
+
+  <h1 i18n:translate="listing_event">會議展覽</h1>
+    <tal:events
+     tal:define="toLocalizedTime nocall:context/@@plone/toLocalizedTime;
+                 plone_view context/@@plone;"
+     tal:repeat="obj view/latest_events">
+    <div tal:define="item_object obj/getObject;
+                     item_description obj/Description;"
+         class="tileItem visualIEFloatFix">
+      <h2 class="tileHeadline">
+        <a href="#"
+           class="summary url"
+           tal:attributes="href obj/getURL;"
+           tal:content="obj/pretty_title_or_id">
+           Event Title
+        </a>
+      </h2>
+      <span class="documentByLine"
+            tal:define="item_start obj/start|obj/StartDate|nothing;
+                        item_end obj/end|obj/EndDate|nothing;
+                        sametime python: item_start == item_end;
+                        samedate python: item_end != item_start;">
+        <tal:sametime condition="sametime"
+             replace="python:toLocalizedTime(item_start,long_format=1)" />
+        <tal:samedate condition="python: samedate and not sametime"
+             replace="python:toLocalizedTime(item_start,long_format=0)" />
+        <tal:daterange condition="python: not samedate and not sametime"
+             replace="python:toLocalizedTime(item_start,long_format=0) + '~' + toLocalizedTime(item_end,long_format=0)" />
+        <tal:location condition="python: obj.location"
+             replace="python: ', ' + obj.location" />
+      </span>
+      <p class="tileBody" tal:condition="obj/Description">
+        <span tal:content="obj/Description">
+            Event Description
+        </span>
+        ( <a href="#"
+            tal:attributes="href obj/getURL;"><span i18n:translate="read_more">閱讀全文</span></a> )
+      </p>
+      <div class="visualClear"><!-- --></div>
+    </div>
+    </tal:events>
+
+    <div style="float: right">
+      <a href="#"
+         tal:attributes="href view/allEventURL">
+         <span i18n:translate="more_events" class="description">更多活動</span>
+      </a>
+    </div>
+    <hr>
+    <div class="visualClear"><!-- --></div>
+
+  </metal:content-core>
+</metal:content-core>
+
+</body>
+</html>
